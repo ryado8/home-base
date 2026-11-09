@@ -10,13 +10,14 @@ import {
   Figtree_600SemiBold,
 } from "@expo-google-fonts/figtree";
 import * as theme from "./src/theme";
+import { FamilyScreen } from "./src/screens/FamilyScreen";
+import { MySharingScreen } from "./src/screens/MySharingScreen";
 
 function phonesChipLabel(phones: number): string {
   return `${phones} family phones`;
 }
 
 export default function App() {
-  // Load the four font files when the app starts; show nothing until they're ready.
   const [fontsLoaded] = useFonts({
     Gabarito_500Medium,
     Gabarito_800ExtraBold,
@@ -29,8 +30,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Home Base</Text>
-      <Text style={styles.chip}>{phonesChipLabel(3)}</Text>
+      <FamilyScreen />
       <StatusBar style="auto" />
     </View>
   );
