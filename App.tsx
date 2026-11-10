@@ -12,6 +12,8 @@ import {
 import * as theme from "./src/theme";
 import { FamilyScreen } from "./src/screens/FamilyScreen";
 import { MySharingScreen } from "./src/screens/MySharingScreen";
+import { PhonesScreen } from "./src/screens/PhonesScreen";
+import { DriveHomeScreen } from "./src/screens/DriveHomeScreen";
 
 function phonesChipLabel(phones: number): string {
   return `${phones} family phones`;
@@ -30,7 +32,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <FamilyScreen />
+      <PhonesScreen />
       <StatusBar style="auto" />
     </View>
   );

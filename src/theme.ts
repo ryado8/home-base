@@ -2,6 +2,7 @@
 // Every screen imports its colours, fonts and spacing from here,
 // so each value is written exactly once in the whole app.
 
+export const aqua: string = "#00FFFF";
 export const ink: string = "#1B2330";
 export const ink2: string = "#4A5462";
 export const slate: string = "#E6ECEF";
