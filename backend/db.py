@@ -2,7 +2,8 @@
 # The credentials come from backend/.env, never from this file.
 import os
 from dotenv import load_dotenv
-from sqlmodel import create_engine, Session, text
+from sqlmodel import create_engine, Session, text, SQLModel, Field
+from pydantic import AwareDatetime
 
 load_dotenv()
 
@@ -17,6 +18,14 @@ def count_locations() -> int:
     with Session(engine) as session:
         statement = text("SELECT COUNT(*) FROM locations")
         return session.exec(statement).scalar_one()
+
+class Location(SQLModel, table=True):
+    __tablename__= "locations"
+    id: int | None = Field(default=None, primary_key=True)
+    who: str
+    latitude: float
+    longitude: float
+    reported_at: AwareDatetime
 
 if __name__ =="__main__":
     print(count_locations())
