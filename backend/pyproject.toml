@@ -1,0 +1,10 @@
+[project]
+name = "backend"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.162.3",
+    "psycopg[binary]>=3.3.8",
+    "python-dotenv>=1.2.4",
+    "sqlmodel>=0.0.48",
+]
