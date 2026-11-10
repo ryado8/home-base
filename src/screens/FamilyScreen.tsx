@@ -1,13 +1,30 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Placeholder } from "../components/Placeholder";
+import type { FamilyStackParams } from "../navigation";
 import * as theme from "../theme";
 
+function phonesChipLabel(phones: number): string {
+  return `${phones} family phones`;
+}
+
 export function FamilyScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<FamilyStackParams>>();
+
   return (
     <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.content}>
         <Placeholder label="Top bar - Home Base" />
-        <Placeholder label="Privacy chip — 3 family phones" />
+        {/* The privacy chip opens Phones. */}
+        <Pressable
+          onPress={() => navigation.navigate("Phones")}
+          accessibilityRole="button"
+          accessibilityLabel={`${phonesChipLabel(3)}. Opens Phones`}
+        >
+          <Placeholder label={`Privacy chip — ${phonesChipLabel(3)} (tap to open Phones)`} />
+        </Pressable>
         <Placeholder
           label="Family map — streets, parks, water, home pin, Mike's amber marker and name tag, Jason's plum marker and name tag, and Mike's dotted route home"
           height={320}
@@ -26,10 +43,6 @@ export function FamilyScreen() {
 
         <Placeholder label="My sharing row — switch with on or paused wording" />
       </ScrollView>
-      <Placeholder
-        label="Bottom tab bar — Family, Drive home, My sharing"
-        height={64}
-      />
     </View>
   );
 }

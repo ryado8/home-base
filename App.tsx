@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   useFonts,
   Gabarito_500Medium,
@@ -10,14 +11,13 @@ import {
   Figtree_600SemiBold,
 } from "@expo-google-fonts/figtree";
 import * as theme from "./src/theme";
-import { FamilyScreen } from "./src/screens/FamilyScreen";
-import { MySharingScreen } from "./src/screens/MySharingScreen";
-import { PhonesScreen } from "./src/screens/PhonesScreen";
-import { DriveHomeScreen } from "./src/screens/DriveHomeScreen";
+import { AppTabs } from "./src/navigation";
 
-function phonesChipLabel(phones: number): string {
-  return `${phones} family phones`;
-}
+// React Navigation's default look, with Street slate behind every screen.
+const navigationTheme = {
+  ...DefaultTheme,
+  colors: { ...DefaultTheme.colors, background: theme.slate },
+};
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,31 +31,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <PhonesScreen />
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer theme={navigationTheme}>
+        <AppTabs />
+      </NavigationContainer>
+      <StatusBar style="dark" />
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: theme.slate,
-  },
-  heading: {
-    fontFamily: theme.gabarito800,
-    color: theme.ink,
-    fontSize: 48,
-  },
-  chip: {
-    fontFamily: theme.figtree600,
-    color: theme.ink2,
-    backgroundColor: theme.slate2,
-    borderRadius: theme.pillsCorner,
-    padding: theme.spacing[0],
-    marginTop: theme.spacing[0],
-  },
-});

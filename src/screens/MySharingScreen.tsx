@@ -21,10 +21,6 @@ export function MySharingScreen() {
 
         <Placeholder label="Sharing paused or back on toast" />
       </ScrollView>
-      <Placeholder
-        label="Bottom tab bar — Family, Drive home, My sharing"
-        height={64}
-      />
     </View>
   );
 }

@@ -1,4 +1,5 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Placeholder } from "../components/Placeholder";
 import * as theme from "../theme";
 import { FamilyMember, Phone } from "../types";
@@ -15,10 +16,22 @@ const phone: Phone = {
 };
 
 export function PhonesScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Placeholder label="Page header with back button, title and subtitle" />
+        {/* Back control: returns to the screen Phones opened from. */}
+        <Pressable
+          onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessibilityLabel="Back to Family"
+          style={styles.back}
+        >
+          <Text style={styles.backText}>← Back</Text>
+        </Pressable>
+
+        <Placeholder label="Page header — title and subtitle" />
 
         <Placeholder label="Family phones panel" />
 
@@ -34,10 +47,6 @@ export function PhonesScreen() {
         <Placeholder label="Replace key confirmation box" />
         <Placeholder label="Key replaced toast" />
       </ScrollView>
-      <Placeholder
-        label="Bottom tab bar — Family, Drive home, My sharing"
-        height={64}
-      />
     </View>
   );
 }
@@ -51,5 +60,15 @@ const styles = StyleSheet.create({
     paddingTop: theme.spacing[6],
     paddingHorizontal: theme.spacing[3],
     paddingBottom: theme.spacing[4],
+  },
+  back: {
+    alignSelf: "flex-start",
+    paddingVertical: theme.spacing[2],
+    marginBottom: theme.spacing[1],
+  },
+  backText: {
+    fontFamily: theme.figtree600,
+    color: theme.ink,
+    fontSize: 16,
   },
 });

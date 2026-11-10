@@ -21,10 +21,6 @@ export function DriveHomeScreen() {
         <Placeholder label="Your sharing note with My sharing link" />
         <Placeholder label="Confirmation toast (home spot saved, alert on or off)" />
       </ScrollView>
-      <Placeholder
-        label="Bottom tab bar — Family, Drive home, My sharing"
-        height={64}
-      />
     </View>
   );
 }
