@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, field_validator, AwareDatetime
-from db import Location, engine
+from db import Location, engine, latest_location
 from sqlmodel import Session
 
 NAMES = ['Ryan', 'Dad', 'Mom']
@@ -36,3 +36,11 @@ def create_location(location: LocationReport):
         session.refresh(location1)
 
     return location1
+
+@app.get("/locations/latest")
+def get_latest() -> dict[str, Location | None]:
+    latest = {}
+    for name in NAMES:
+        latest[name] = latest_location(name)
+
+    return latest

@@ -2,7 +2,7 @@
 # The credentials come from backend/.env, never from this file.
 import os
 from dotenv import load_dotenv
-from sqlmodel import create_engine, Session, text, SQLModel, Field
+from sqlmodel import create_engine, Session, text, SQLModel, Field, select
 from pydantic import AwareDatetime
 
 load_dotenv()
@@ -26,6 +26,14 @@ class Location(SQLModel, table=True):
     latitude: float
     longitude: float
     reported_at: AwareDatetime
+
+def latest_location(name: str) -> Location | None:
+    with Session(engine) as session:
+        statement = select(Location).where(name == Location.who).order_by(Location.reported_at.desc())
+        data_row = session.exec(statement).first()
+
+        return data_row
+
 
 if __name__ =="__main__":
     print(count_locations())
